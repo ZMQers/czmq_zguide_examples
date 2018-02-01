@@ -83,6 +83,13 @@ src_hwclient_LDADD = ${program_libs}
 src_hwclient_SOURCES = src/hwclient.c
 endif #ENABLE_HWCLIENT
 
+if ENABLE_VERSION
+bin_PROGRAMS += src/version
+src_version_CPPFLAGS = ${AM_CPPFLAGS}
+src_version_LDADD = ${program_libs}
+src_version_SOURCES = src/version.c
+endif #ENABLE_VERSION
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -97,6 +104,7 @@ src: \
 		src/lpserver \
 		src/hwserver \
 		src/hwclient \
+		src/version \
 		src/czguide_selftest \
 		src/libczguide.la
 

@@ -534,6 +534,16 @@ AC_ARG_ENABLE([hwclient],
 AM_CONDITIONAL([ENABLE_HWCLIENT], [test x$enable_hwclient != xno])
 AM_COND_IF([ENABLE_HWCLIENT], [AC_MSG_NOTICE([ENABLE_HWCLIENT defined])])
 
+# Check for version intent
+AC_ARG_ENABLE([version],
+    AS_HELP_STRING([--enable-version],
+        [Compile and install 'version' [default=yes]]),
+    [enable_version=$enableval],
+    [enable_version=yes])
+
+AM_CONDITIONAL([ENABLE_VERSION], [test x$enable_version != xno])
+AM_COND_IF([ENABLE_VERSION], [AC_MSG_NOTICE([ENABLE_VERSION defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

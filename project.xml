@@ -14,6 +14,7 @@
     <main name = "lpserver" />
     <main name = "hwserver" />
     <main name = "hwclient" />
+    <main name = "version" />
 
     <class name = "common" />
 

@@ -21,6 +21,8 @@ hwserver.txt
 hwserver.doc
 hwclient.txt
 hwclient.doc
+version.txt
+version.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc
