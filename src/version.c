@@ -37,7 +37,7 @@ int main (int argc, char *argv [])
     }
     //  Insert main code here
     if (verbose)
-        zsys_info ("version - ");
+        zsys_info ("version - Report 0MQ version");
 
     int major, minor, patch;
     zmq_version (&major, &minor, &patch);
