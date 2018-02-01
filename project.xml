@@ -13,6 +13,7 @@
     <main name = "lpclient" />
     <main name = "lpserver" />
     <main name = "hwserver" />
+    <main name = "hwclient" />
 
     <class name = "common" />
 
