@@ -6,7 +6,7 @@
 ########################################################################
 # Project setup
 ########################################################################
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 2.8.8)
 project(czguide)
 enable_language(C)
 enable_testing()
@@ -67,7 +67,7 @@ if (MSVC)
 endif()
 
 # specific case of windows UWP
-if( ${CMAKE_SYSTEM_NAME} STREQUAL "WindowsStore" AND ${CMAKE_SYSTEM_VERSION} STREQUAL "10.0")
+if( "${CMAKE_SYSTEM_NAME}" STREQUAL "WindowsStore" AND "${CMAKE_SYSTEM_VERSION}" STREQUAL "10.0")
   ADD_DEFINITIONS(-DZMQ_HAVE_WINDOWS_UWP)
   ADD_DEFINITIONS(-D_WIN32_WINNT=_WIN32_WINNT_WIN10)
 endif()
@@ -111,6 +111,16 @@ ELSE (CZMQ_FOUND)
 ENDIF (CZMQ_FOUND)
 
 ########################################################################
+# version
+########################################################################
+set(CZGUIDE_VERSION_MAJOR 0)
+set(CZGUIDE_VERSION_MINOR 0)
+set(CZGUIDE_VERSION_PATCH 0)
+set(CZGUIDE_VERSION "${CZGUIDE_VERSION_MAJOR}.${CZGUIDE_VERSION_MINOR}.${CZGUIDE_VERSION_PATCH}")
+message(STATUS "Detected CZGUIDE Version - ${CZGUIDE_VERSION}")
+
+
+########################################################################
 # includes
 ########################################################################
 set (czguide_headers
@@ -130,6 +140,8 @@ install(FILES ${czguide_headers} DESTINATION include)
 ########################################################################
 # library
 ########################################################################
+
+
 include_directories("${SOURCE_DIR}/src" "${SOURCE_DIR}/include")
 set (czguide_sources
 )
@@ -147,28 +159,90 @@ IF (ENABLE_DRAFTS)
 ENDIF (ENABLE_DRAFTS)
 
 source_group("Source Files" FILES ${czguide_sources})
-if (NOT DEFINED BUILD_SHARED_LIBS)
-    SET(BUILD_SHARED_LIBS ON)
-endif()
-add_library(czguide ${czguide_sources})
-set_target_properties(czguide
-    PROPERTIES DEFINE_SYMBOL "CZGUIDE_EXPORTS"
-)
-set_target_properties (czguide
-    PROPERTIES SOVERSION "0"
-)
-set_target_properties (czguide
-    PROPERTIES VERSION "0.0.0"
-)
-target_link_libraries(czguide
-    ${ZEROMQ_LIBRARIES} ${MORE_LIBRARIES}
-)
 
-install(TARGETS czguide
+
+option(CZGUIDE_BUILD_SHARED "Whether or not to build the shared object" ON)
+option(CZGUIDE_BUILD_STATIC "Whether or not to build the static archive" ON)
+
+if (NOT CZGUIDE_BUILD_SHARED AND NOT CZGUIDE_BUILD_STATIC)
+  message(FATAL_ERROR "Neither static nor shared library build enabled")
+endif()
+
+IF (NOT MSVC)
+  # avoid building everything twice for shared + static
+  # only on *nix, as Windows needs different preprocessor defines in static builds
+  add_library (czguide_objects OBJECT ${czguide_sources})
+  set_property(TARGET czguide_objects PROPERTY POSITION_INDEPENDENT_CODE ON)
+ENDIF (NOT MSVC)
+
+# shared
+if (CZGUIDE_BUILD_SHARED)
+  IF (MSVC)
+    add_library(czguide SHARED ${czguide_sources})
+  ELSE (MSVC)
+    add_library(czguide SHARED $<TARGET_OBJECTS:czguide_objects>)
+  ENDIF (MSVC)
+
+  set_target_properties (czguide PROPERTIES
+    PUBLIC_HEADER "${public_headers}"
+    DEFINE_SYMBOL "CZGUIDE_EXPORTS"
+    SOVERSION "0"
+    VERSION "${CZGUIDE_VERSION}"
+    COMPILE_DEFINITIONS "DLL_EXPORT"
+    OUTPUT_NAME "czguide"
+    PREFIX "lib"
+  )
+
+  target_link_libraries(czguide
+    ${ZEROMQ_LIBRARIES} ${MORE_LIBRARIES}
+  )
+
+  install(TARGETS czguide
     LIBRARY DESTINATION "lib${LIB_SUFFIX}" # .so file
     ARCHIVE DESTINATION "lib${LIB_SUFFIX}" # .lib file
-    RUNTIME DESTINATION bin              # .dll file
-)
+    RUNTIME DESTINATION bin                # .dll file
+  )
+
+  target_include_directories(czguide
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+  )
+endif()
+
+# static
+if (CZGUIDE_BUILD_STATIC)
+  IF (MSVC)
+    add_library(czguide-static STATIC ${czguide_sources})
+  ELSE (MSVC)
+    add_library(czguide-static STATIC $<TARGET_OBJECTS:objects>)
+  ENDIF (MSVC)
+
+  set_target_properties(czguide-static PROPERTIES
+    PUBLIC_HEADER "${public_headers}"
+    COMPILE_DEFINITIONS "CZGUIDE_STATIC"
+    OUTPUT_NAME "czguide"
+    PREFIX "lib"
+  )
+
+  target_link_libraries(czguide-static
+    ${ZEROMQ_LIBRARIES} ${MORE_LIBRARIES}
+  )
+
+  install(TARGETS czguide-static
+    LIBRARY DESTINATION "lib${LIB_SUFFIX}" # .so file
+    ARCHIVE DESTINATION "lib${LIB_SUFFIX}" # .lib file
+    RUNTIME DESTINATION bin                # .dll file
+  )
+
+  target_include_directories(czguide-static
+    PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include
+  )
+  target_compile_definitions(czguide-static
+    PUBLIC CZGUIDE_STATIC
+  )
+
+endif()
+
+
 
 ########################################################################
 # pkgconfig
@@ -200,6 +274,7 @@ add_executable(
     lpclient
     "${SOURCE_DIR}/src/lpclient.c"
 )
+if (TARGET czguide)
 target_link_libraries(
     lpclient
     czguide
@@ -207,6 +282,16 @@ target_link_libraries(
     ${CZMQ_LIBRARIES}
     ${OPTIONAL_LIBRARIES}
 )
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    lpclient
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
 install(TARGETS lpclient
     RUNTIME DESTINATION bin
 )
@@ -214,6 +299,7 @@ add_executable(
     lpserver
     "${SOURCE_DIR}/src/lpserver.c"
 )
+if (TARGET czguide)
 target_link_libraries(
     lpserver
     czguide
@@ -221,13 +307,49 @@ target_link_libraries(
     ${CZMQ_LIBRARIES}
     ${OPTIONAL_LIBRARIES}
 )
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    lpserver
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
 install(TARGETS lpserver
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    hwserver
+    "${SOURCE_DIR}/src/hwserver.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    hwserver
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    hwserver
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS hwserver
     RUNTIME DESTINATION bin
 )
 add_executable(
     czguide_selftest
     "${SOURCE_DIR}/src/czguide_selftest.c"
 )
+if (TARGET czguide)
 target_link_libraries(
     czguide_selftest
     czguide
@@ -235,6 +357,16 @@ target_link_libraries(
     ${CZMQ_LIBRARIES}
     ${OPTIONAL_LIBRARIES}
 )
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    czguide_selftest
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
 
 ########################################################################
 # tests
@@ -316,6 +448,7 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
                     ${CMAKE_BINARY_DIR}/src/lpclient
                     ${CMAKE_BINARY_DIR}/src/lpserver
+                    ${CMAKE_BINARY_DIR}/src/hwserver
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
 )
 
@@ -339,6 +472,8 @@ message (STATUS "  C compiler        :   ${CMAKE_C_COMPILER}")
 message (STATUS "  Debug C flags     :   ${CMAKE_C_FLAGS_DEBUG} ${CMAKE_C_FLAGS}")
 message (STATUS "  Release C flags   :   ${CMAKE_C_FLAGS_RELEASE} ${CMAKE_C_FLAGS}")
 message (STATUS "  Build type        :   ${CMAKE_BUILD_TYPE}")
+message (STATUS "  Static build      :   ${CZGUIDE_BUILD_STATIC}")
+message (STATUS "  Shared build      :   ${CZGUIDE_BUILD_SHARED}")
 IF (ENABLE_DRAFTS)
 message (STATUS "  Draft API         :   Yes")
 ELSE (ENABLE_DRAFTS)

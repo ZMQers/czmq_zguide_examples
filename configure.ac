@@ -39,6 +39,9 @@ AC_SUBST(PACKAGE_VERSION)
 LTVER="0:0:0"
 AC_SUBST(LTVER)
 
+# building in a subdirectory?
+AM_CONDITIONAL([USING_VPATH], [test "x${srcdir}" != "x."])
+
 # Capture c flags
 CZGUIDE_ORIG_CFLAGS="${CFLAGS:-none}"
 
@@ -51,6 +54,9 @@ AC_PROG_LIBTOOL
 AC_PROG_SED
 AC_PROG_AWK
 PKG_PROG_PKG_CONFIG
+
+# Check endianess of the system
+AC_C_BIGENDIAN
 
 # Code coverage
 AC_MSG_CHECKING([whether to enable GCov])
@@ -123,7 +129,9 @@ AC_ARG_WITH([libzmq],
     [
         search_libzmq="yes"
     ],
-    [])
+    [
+        search_libzmq="yes"
+    ])
 AS_CASE([x"${with_libzmq}"],
     [xyes], [search_libzmq="yes"],
     [xno],  [search_libzmq="no"])
@@ -210,7 +218,9 @@ AC_ARG_WITH([libczmq],
     [
         search_libczmq="yes"
     ],
-    [])
+    [
+        search_libczmq="yes"
+    ])
 AS_CASE([x"${with_libczmq}"],
     [xyes], [search_libczmq="yes"],
     [xno],  [search_libczmq="no"])
@@ -319,6 +329,9 @@ else
     AC_CHECK_PROG(czguide_have_asciidoc, asciidoc, yes, no)
     AC_CHECK_PROG(czguide_have_xmlto, xmlto, yes, no)
     if test "x$czguide_have_asciidoc" = "xno" -o "x$czguide_have_xmlto" = "xno"; then
+        if test "x$with_docs" = "xyes" ; then
+            AC_MSG_ERROR([Build with docs was explicitly requested, but tools are not available])
+        fi
         czguide_build_doc="no"
         # Tarballs built with 'make dist' ship with prebuilt documentation.
         if ! test -f doc/czguide.7; then
@@ -500,6 +513,16 @@ AC_ARG_ENABLE([lpserver],
 
 AM_CONDITIONAL([ENABLE_LPSERVER], [test x$enable_lpserver != xno])
 AM_COND_IF([ENABLE_LPSERVER], [AC_MSG_NOTICE([ENABLE_LPSERVER defined])])
+
+# Check for hwserver intent
+AC_ARG_ENABLE([hwserver],
+    AS_HELP_STRING([--enable-hwserver],
+        [Compile and install 'hwserver' [default=yes]]),
+    [enable_hwserver=$enableval],
+    [enable_hwserver=yes])
+
+AM_CONDITIONAL([ENABLE_HWSERVER], [test x$enable_hwserver != xno])
+AM_COND_IF([ENABLE_HWSERVER], [AC_MSG_NOTICE([ENABLE_HWSERVER defined])])
 
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],

@@ -6,7 +6,7 @@
 all-local: doc
 
 # Public programs ("main" tags in project.xml), auto-regenerated:
-MAN1 = lpclient.1 lpserver.1
+MAN1 = lpclient.1 lpserver.1 hwserver.1
 # Public classes ("class" tags in project.xml), auto-regenerated:
 MAN3 = common.3
 # Project overview, written by a human after initial skeleton:
@@ -76,8 +76,12 @@ GENERATED_DOCS += lpserver.txt lpserver.doc
 lpserver.txt: $(top_srcdir)/src/lpserver.c
 	"$(srcdir)/mkman" "lpserver" "$(builddir)/lpserver.txt" "$(srcdir)/.."
 
+GENERATED_DOCS += hwserver.txt hwserver.doc
+hwserver.txt: $(top_srcdir)/src/hwserver.c
+	"$(srcdir)/mkman" "hwserver" "$(builddir)/hwserver.txt" "$(srcdir)/.."
 
-clean:
+
+clean-local:
 	rm -f *.1 *.3 *.7 $(GENERATED_DOCS)
 
 doc: $(GENERATED_DOCS)

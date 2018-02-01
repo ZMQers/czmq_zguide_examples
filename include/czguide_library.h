@@ -43,6 +43,9 @@
 #       define CZGUIDE_EXPORT __declspec(dllimport)
 #   endif
 #   define CZGUIDE_PRIVATE
+#elif defined (__CYGWIN__)
+#   define CZGUIDE_EXPORT
+#   define CZGUIDE_PRIVATE
 #else
 #   define CZGUIDE_EXPORT
 #   if (defined __GNUC__ && __GNUC__ >= 4) || defined __INTEL_COMPILER
