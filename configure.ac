@@ -544,6 +544,26 @@ AC_ARG_ENABLE([version],
 AM_CONDITIONAL([ENABLE_VERSION], [test x$enable_version != xno])
 AM_COND_IF([ENABLE_VERSION], [AC_MSG_NOTICE([ENABLE_VERSION defined])])
 
+# Check for wuserver intent
+AC_ARG_ENABLE([wuserver],
+    AS_HELP_STRING([--enable-wuserver],
+        [Compile and install 'wuserver' [default=yes]]),
+    [enable_wuserver=$enableval],
+    [enable_wuserver=yes])
+
+AM_CONDITIONAL([ENABLE_WUSERVER], [test x$enable_wuserver != xno])
+AM_COND_IF([ENABLE_WUSERVER], [AC_MSG_NOTICE([ENABLE_WUSERVER defined])])
+
+# Check for wuclient intent
+AC_ARG_ENABLE([wuclient],
+    AS_HELP_STRING([--enable-wuclient],
+        [Compile and install 'wuclient' [default=yes]]),
+    [enable_wuclient=$enableval],
+    [enable_wuclient=yes])
+
+AM_CONDITIONAL([ENABLE_WUCLIENT], [test x$enable_wuclient != xno])
+AM_COND_IF([ENABLE_WUCLIENT], [AC_MSG_NOTICE([ENABLE_WUCLIENT defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

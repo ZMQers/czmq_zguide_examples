@@ -6,7 +6,7 @@
 all-local: doc
 
 # Public programs ("main" tags in project.xml), auto-regenerated:
-MAN1 = lpclient.1 lpserver.1 hwserver.1 hwclient.1 version.1
+MAN1 = lpclient.1 lpserver.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1
 # Public classes ("class" tags in project.xml), auto-regenerated:
 MAN3 = common.3
 # Project overview, written by a human after initial skeleton:
@@ -87,6 +87,14 @@ hwclient.txt: $(top_srcdir)/src/hwclient.c
 GENERATED_DOCS += version.txt version.doc
 version.txt: $(top_srcdir)/src/version.c
 	"$(srcdir)/mkman" "version" "$(builddir)/version.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += wuserver.txt wuserver.doc
+wuserver.txt: $(top_srcdir)/src/wuserver.c
+	"$(srcdir)/mkman" "wuserver" "$(builddir)/wuserver.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += wuclient.txt wuclient.doc
+wuclient.txt: $(top_srcdir)/src/wuclient.c
+	"$(srcdir)/mkman" "wuclient" "$(builddir)/wuclient.txt" "$(srcdir)/.."
 
 
 clean-local:

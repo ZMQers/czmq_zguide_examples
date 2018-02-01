@@ -90,6 +90,20 @@ src_version_LDADD = ${program_libs}
 src_version_SOURCES = src/version.c
 endif #ENABLE_VERSION
 
+if ENABLE_WUSERVER
+bin_PROGRAMS += src/wuserver
+src_wuserver_CPPFLAGS = ${AM_CPPFLAGS}
+src_wuserver_LDADD = ${program_libs}
+src_wuserver_SOURCES = src/wuserver.c
+endif #ENABLE_WUSERVER
+
+if ENABLE_WUCLIENT
+bin_PROGRAMS += src/wuclient
+src_wuclient_CPPFLAGS = ${AM_CPPFLAGS}
+src_wuclient_LDADD = ${program_libs}
+src_wuclient_SOURCES = src/wuclient.c
+endif #ENABLE_WUCLIENT
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -105,6 +119,8 @@ src: \
 		src/hwserver \
 		src/hwclient \
 		src/version \
+		src/wuserver \
+		src/wuclient \
 		src/czguide_selftest \
 		src/libczguide.la
 

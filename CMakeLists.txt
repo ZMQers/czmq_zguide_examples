@@ -396,6 +396,56 @@ install(TARGETS version
     RUNTIME DESTINATION bin
 )
 add_executable(
+    wuserver
+    "${SOURCE_DIR}/src/wuserver.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    wuserver
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    wuserver
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS wuserver
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    wuclient
+    "${SOURCE_DIR}/src/wuclient.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    wuclient
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    wuclient
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS wuclient
+    RUNTIME DESTINATION bin
+)
+add_executable(
     czguide_selftest
     "${SOURCE_DIR}/src/czguide_selftest.c"
 )
@@ -501,6 +551,8 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/hwserver
                     ${CMAKE_BINARY_DIR}/src/hwclient
                     ${CMAKE_BINARY_DIR}/src/version
+                    ${CMAKE_BINARY_DIR}/src/wuserver
+                    ${CMAKE_BINARY_DIR}/src/wuclient
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
 )
 
