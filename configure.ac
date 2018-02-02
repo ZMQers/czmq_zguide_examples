@@ -674,6 +674,26 @@ AC_ARG_ENABLE([wuproxy],
 AM_CONDITIONAL([ENABLE_WUPROXY], [test x$enable_wuproxy != xno])
 AM_COND_IF([ENABLE_WUPROXY], [AC_MSG_NOTICE([ENABLE_WUPROXY defined])])
 
+# Check for tasksink2 intent
+AC_ARG_ENABLE([tasksink2],
+    AS_HELP_STRING([--enable-tasksink2],
+        [Compile and install 'tasksink2' [default=yes]]),
+    [enable_tasksink2=$enableval],
+    [enable_tasksink2=yes])
+
+AM_CONDITIONAL([ENABLE_TASKSINK2], [test x$enable_tasksink2 != xno])
+AM_COND_IF([ENABLE_TASKSINK2], [AC_MSG_NOTICE([ENABLE_TASKSINK2 defined])])
+
+# Check for taskwork2 intent
+AC_ARG_ENABLE([taskwork2],
+    AS_HELP_STRING([--enable-taskwork2],
+        [Compile and install 'taskwork2' [default=yes]]),
+    [enable_taskwork2=$enableval],
+    [enable_taskwork2=yes])
+
+AM_CONDITIONAL([ENABLE_TASKWORK2], [test x$enable_taskwork2 != xno])
+AM_COND_IF([ENABLE_TASKWORK2], [AC_MSG_NOTICE([ENABLE_TASKWORK2 defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

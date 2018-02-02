@@ -49,6 +49,10 @@ msgqueue.txt
 msgqueue.doc
 wuproxy.txt
 wuproxy.doc
+tasksink2.txt
+tasksink2.doc
+taskwork2.txt
+taskwork2.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc

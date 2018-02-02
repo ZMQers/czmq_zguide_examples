@@ -721,6 +721,56 @@ install(TARGETS wuproxy
     RUNTIME DESTINATION bin
 )
 add_executable(
+    tasksink2
+    "${SOURCE_DIR}/src/tasksink2.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    tasksink2
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    tasksink2
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS tasksink2
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    taskwork2
+    "${SOURCE_DIR}/src/taskwork2.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    taskwork2
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    taskwork2
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS taskwork2
+    RUNTIME DESTINATION bin
+)
+add_executable(
     czguide_selftest
     "${SOURCE_DIR}/src/czguide_selftest.c"
 )
@@ -839,6 +889,8 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/rrbroker
                     ${CMAKE_BINARY_DIR}/src/msgqueue
                     ${CMAKE_BINARY_DIR}/src/wuproxy
+                    ${CMAKE_BINARY_DIR}/src/tasksink2
+                    ${CMAKE_BINARY_DIR}/src/taskwork2
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
 )
 

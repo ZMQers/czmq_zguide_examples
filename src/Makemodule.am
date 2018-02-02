@@ -181,6 +181,20 @@ src_wuproxy_LDADD = ${program_libs}
 src_wuproxy_SOURCES = src/wuproxy.c
 endif #ENABLE_WUPROXY
 
+if ENABLE_TASKSINK2
+bin_PROGRAMS += src/tasksink2
+src_tasksink2_CPPFLAGS = ${AM_CPPFLAGS}
+src_tasksink2_LDADD = ${program_libs}
+src_tasksink2_SOURCES = src/tasksink2.c
+endif #ENABLE_TASKSINK2
+
+if ENABLE_TASKWORK2
+bin_PROGRAMS += src/taskwork2
+src_taskwork2_CPPFLAGS = ${AM_CPPFLAGS}
+src_taskwork2_LDADD = ${program_libs}
+src_taskwork2_SOURCES = src/taskwork2.c
+endif #ENABLE_TASKWORK2
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -209,6 +223,8 @@ src: \
 		src/rrbroker \
 		src/msgqueue \
 		src/wuproxy \
+		src/tasksink2 \
+		src/taskwork2 \
 		src/czguide_selftest \
 		src/libczguide.la
 

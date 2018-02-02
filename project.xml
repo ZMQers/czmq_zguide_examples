@@ -35,6 +35,9 @@
 
     <main name = "wuproxy" />
 
+    <main name = "tasksink2" />
+    <main name = "taskwork2" />
+
     <class name = "common" />
 
 </project>
