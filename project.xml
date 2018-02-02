@@ -12,6 +12,9 @@
 
     <main name = "lpclient" />
     <main name = "lpserver" />
+
+    <main name = "printerrno" />
+
     <main name = "hwserver" />
     <main name = "hwclient" />
     <main name = "version" />
@@ -20,6 +23,7 @@
     <main name = "tasksink" />
     <main name = "taskvent" />
     <main name = "taskwork" />
+    
 
     <class name = "common" />
 

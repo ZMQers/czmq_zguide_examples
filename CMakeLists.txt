@@ -321,6 +321,31 @@ install(TARGETS lpserver
     RUNTIME DESTINATION bin
 )
 add_executable(
+    printerrno
+    "${SOURCE_DIR}/src/printerrno.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    printerrno
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    printerrno
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS printerrno
+    RUNTIME DESTINATION bin
+)
+add_executable(
     hwserver
     "${SOURCE_DIR}/src/hwserver.c"
 )
@@ -623,6 +648,7 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
                     ${CMAKE_BINARY_DIR}/src/lpclient
                     ${CMAKE_BINARY_DIR}/src/lpserver
+                    ${CMAKE_BINARY_DIR}/src/printerrno
                     ${CMAKE_BINARY_DIR}/src/hwserver
                     ${CMAKE_BINARY_DIR}/src/hwclient
                     ${CMAKE_BINARY_DIR}/src/version

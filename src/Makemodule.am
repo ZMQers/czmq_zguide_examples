@@ -69,6 +69,13 @@ src_lpserver_LDADD = ${program_libs}
 src_lpserver_SOURCES = src/lpserver.c
 endif #ENABLE_LPSERVER
 
+if ENABLE_PRINTERRNO
+bin_PROGRAMS += src/printerrno
+src_printerrno_CPPFLAGS = ${AM_CPPFLAGS}
+src_printerrno_LDADD = ${program_libs}
+src_printerrno_SOURCES = src/printerrno.c
+endif #ENABLE_PRINTERRNO
+
 if ENABLE_HWSERVER
 bin_PROGRAMS += src/hwserver
 src_hwserver_CPPFLAGS = ${AM_CPPFLAGS}
@@ -137,6 +144,7 @@ endif #ENABLE_CZGUIDE_SELFTEST
 src: \
 		src/lpclient \
 		src/lpserver \
+		src/printerrno \
 		src/hwserver \
 		src/hwclient \
 		src/version \

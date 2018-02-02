@@ -514,6 +514,16 @@ AC_ARG_ENABLE([lpserver],
 AM_CONDITIONAL([ENABLE_LPSERVER], [test x$enable_lpserver != xno])
 AM_COND_IF([ENABLE_LPSERVER], [AC_MSG_NOTICE([ENABLE_LPSERVER defined])])
 
+# Check for printerrno intent
+AC_ARG_ENABLE([printerrno],
+    AS_HELP_STRING([--enable-printerrno],
+        [Compile and install 'printerrno' [default=yes]]),
+    [enable_printerrno=$enableval],
+    [enable_printerrno=yes])
+
+AM_CONDITIONAL([ENABLE_PRINTERRNO], [test x$enable_printerrno != xno])
+AM_COND_IF([ENABLE_PRINTERRNO], [AC_MSG_NOTICE([ENABLE_PRINTERRNO defined])])
+
 # Check for hwserver intent
 AC_ARG_ENABLE([hwserver],
     AS_HELP_STRING([--enable-hwserver],

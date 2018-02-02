@@ -6,7 +6,7 @@
 all-local: doc
 
 # Public programs ("main" tags in project.xml), auto-regenerated:
-MAN1 = lpclient.1 lpserver.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1 tasksink.1 taskvent.1 taskwork.1
+MAN1 = lpclient.1 lpserver.1 printerrno.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1 tasksink.1 taskvent.1 taskwork.1
 # Public classes ("class" tags in project.xml), auto-regenerated:
 MAN3 = common.3
 # Project overview, written by a human after initial skeleton:
@@ -75,6 +75,10 @@ lpclient.txt: $(top_srcdir)/src/lpclient.c
 GENERATED_DOCS += lpserver.txt lpserver.doc
 lpserver.txt: $(top_srcdir)/src/lpserver.c
 	"$(srcdir)/mkman" "lpserver" "$(builddir)/lpserver.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += printerrno.txt printerrno.doc
+printerrno.txt: $(top_srcdir)/src/printerrno.c
+	"$(srcdir)/mkman" "printerrno" "$(builddir)/printerrno.txt" "$(srcdir)/.."
 
 GENERATED_DOCS += hwserver.txt hwserver.doc
 hwserver.txt: $(top_srcdir)/src/hwserver.c
