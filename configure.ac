@@ -704,6 +704,26 @@ AC_ARG_ENABLE([interrupt],
 AM_CONDITIONAL([ENABLE_INTERRUPT], [test x$enable_interrupt != xno])
 AM_COND_IF([ENABLE_INTERRUPT], [AC_MSG_NOTICE([ENABLE_INTERRUPT defined])])
 
+# Check for mtserver intent
+AC_ARG_ENABLE([mtserver],
+    AS_HELP_STRING([--enable-mtserver],
+        [Compile and install 'mtserver' [default=yes]]),
+    [enable_mtserver=$enableval],
+    [enable_mtserver=yes])
+
+AM_CONDITIONAL([ENABLE_MTSERVER], [test x$enable_mtserver != xno])
+AM_COND_IF([ENABLE_MTSERVER], [AC_MSG_NOTICE([ENABLE_MTSERVER defined])])
+
+# Check for mtrelay intent
+AC_ARG_ENABLE([mtrelay],
+    AS_HELP_STRING([--enable-mtrelay],
+        [Compile and install 'mtrelay' [default=yes]]),
+    [enable_mtrelay=$enableval],
+    [enable_mtrelay=yes])
+
+AM_CONDITIONAL([ENABLE_MTRELAY], [test x$enable_mtrelay != xno])
+AM_COND_IF([ENABLE_MTRELAY], [AC_MSG_NOTICE([ENABLE_MTRELAY defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

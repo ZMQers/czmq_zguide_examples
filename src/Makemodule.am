@@ -202,6 +202,20 @@ src_interrupt_LDADD = ${program_libs}
 src_interrupt_SOURCES = src/interrupt.c
 endif #ENABLE_INTERRUPT
 
+if ENABLE_MTSERVER
+bin_PROGRAMS += src/mtserver
+src_mtserver_CPPFLAGS = ${AM_CPPFLAGS}
+src_mtserver_LDADD = ${program_libs}
+src_mtserver_SOURCES = src/mtserver.c
+endif #ENABLE_MTSERVER
+
+if ENABLE_MTRELAY
+bin_PROGRAMS += src/mtrelay
+src_mtrelay_CPPFLAGS = ${AM_CPPFLAGS}
+src_mtrelay_LDADD = ${program_libs}
+src_mtrelay_SOURCES = src/mtrelay.c
+endif #ENABLE_MTRELAY
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -233,6 +247,8 @@ src: \
 		src/tasksink2 \
 		src/taskwork2 \
 		src/interrupt \
+		src/mtserver \
+		src/mtrelay \
 		src/czguide_selftest \
 		src/libczguide.la
 

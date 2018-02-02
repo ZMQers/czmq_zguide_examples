@@ -40,6 +40,9 @@
 
     <main name = "interrupt" />
 
+    <main name = "mtserver" />
+    <main name = "mtrelay" />
+
     <class name = "common" />
 
 </project>

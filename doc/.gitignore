@@ -55,6 +55,10 @@ taskwork2.txt
 taskwork2.doc
 interrupt.txt
 interrupt.doc
+mtserver.txt
+mtserver.doc
+mtrelay.txt
+mtrelay.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc
