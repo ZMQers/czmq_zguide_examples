@@ -6,7 +6,7 @@
 all-local: doc
 
 # Public programs ("main" tags in project.xml), auto-regenerated:
-MAN1 = lpclient.1 lpserver.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1
+MAN1 = lpclient.1 lpserver.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1 tasksink.1 taskvent.1 taskwork.1
 # Public classes ("class" tags in project.xml), auto-regenerated:
 MAN3 = common.3
 # Project overview, written by a human after initial skeleton:
@@ -95,6 +95,18 @@ wuserver.txt: $(top_srcdir)/src/wuserver.c
 GENERATED_DOCS += wuclient.txt wuclient.doc
 wuclient.txt: $(top_srcdir)/src/wuclient.c
 	"$(srcdir)/mkman" "wuclient" "$(builddir)/wuclient.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += tasksink.txt tasksink.doc
+tasksink.txt: $(top_srcdir)/src/tasksink.c
+	"$(srcdir)/mkman" "tasksink" "$(builddir)/tasksink.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += taskvent.txt taskvent.doc
+taskvent.txt: $(top_srcdir)/src/taskvent.c
+	"$(srcdir)/mkman" "taskvent" "$(builddir)/taskvent.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += taskwork.txt taskwork.doc
+taskwork.txt: $(top_srcdir)/src/taskwork.c
+	"$(srcdir)/mkman" "taskwork" "$(builddir)/taskwork.txt" "$(srcdir)/.."
 
 
 clean-local:

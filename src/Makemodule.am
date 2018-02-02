@@ -104,6 +104,27 @@ src_wuclient_LDADD = ${program_libs}
 src_wuclient_SOURCES = src/wuclient.c
 endif #ENABLE_WUCLIENT
 
+if ENABLE_TASKSINK
+bin_PROGRAMS += src/tasksink
+src_tasksink_CPPFLAGS = ${AM_CPPFLAGS}
+src_tasksink_LDADD = ${program_libs}
+src_tasksink_SOURCES = src/tasksink.c
+endif #ENABLE_TASKSINK
+
+if ENABLE_TASKVENT
+bin_PROGRAMS += src/taskvent
+src_taskvent_CPPFLAGS = ${AM_CPPFLAGS}
+src_taskvent_LDADD = ${program_libs}
+src_taskvent_SOURCES = src/taskvent.c
+endif #ENABLE_TASKVENT
+
+if ENABLE_TASKWORK
+bin_PROGRAMS += src/taskwork
+src_taskwork_CPPFLAGS = ${AM_CPPFLAGS}
+src_taskwork_LDADD = ${program_libs}
+src_taskwork_SOURCES = src/taskwork.c
+endif #ENABLE_TASKWORK
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -121,6 +142,9 @@ src: \
 		src/version \
 		src/wuserver \
 		src/wuclient \
+		src/tasksink \
+		src/taskvent \
+		src/taskwork \
 		src/czguide_selftest \
 		src/libczguide.la
 

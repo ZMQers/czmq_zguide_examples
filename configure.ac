@@ -564,6 +564,36 @@ AC_ARG_ENABLE([wuclient],
 AM_CONDITIONAL([ENABLE_WUCLIENT], [test x$enable_wuclient != xno])
 AM_COND_IF([ENABLE_WUCLIENT], [AC_MSG_NOTICE([ENABLE_WUCLIENT defined])])
 
+# Check for tasksink intent
+AC_ARG_ENABLE([tasksink],
+    AS_HELP_STRING([--enable-tasksink],
+        [Compile and install 'tasksink' [default=yes]]),
+    [enable_tasksink=$enableval],
+    [enable_tasksink=yes])
+
+AM_CONDITIONAL([ENABLE_TASKSINK], [test x$enable_tasksink != xno])
+AM_COND_IF([ENABLE_TASKSINK], [AC_MSG_NOTICE([ENABLE_TASKSINK defined])])
+
+# Check for taskvent intent
+AC_ARG_ENABLE([taskvent],
+    AS_HELP_STRING([--enable-taskvent],
+        [Compile and install 'taskvent' [default=yes]]),
+    [enable_taskvent=$enableval],
+    [enable_taskvent=yes])
+
+AM_CONDITIONAL([ENABLE_TASKVENT], [test x$enable_taskvent != xno])
+AM_COND_IF([ENABLE_TASKVENT], [AC_MSG_NOTICE([ENABLE_TASKVENT defined])])
+
+# Check for taskwork intent
+AC_ARG_ENABLE([taskwork],
+    AS_HELP_STRING([--enable-taskwork],
+        [Compile and install 'taskwork' [default=yes]]),
+    [enable_taskwork=$enableval],
+    [enable_taskwork=yes])
+
+AM_CONDITIONAL([ENABLE_TASKWORK], [test x$enable_taskwork != xno])
+AM_COND_IF([ENABLE_TASKWORK], [AC_MSG_NOTICE([ENABLE_TASKWORK defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

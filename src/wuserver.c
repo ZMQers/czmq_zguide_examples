@@ -43,6 +43,7 @@ int main (int argc, char *argv [])
     void *context = zmq_ctx_new ();
     void *publisher = zmq_socket (context, ZMQ_PUB);
     int rc = zmq_bind (publisher, "tcp://*:5556");
+    printf("rc%d", rc);
     assert (rc == 0);
 
     //  Initialize random number generator

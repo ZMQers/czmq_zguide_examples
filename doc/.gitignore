@@ -27,6 +27,12 @@ wuserver.txt
 wuserver.doc
 wuclient.txt
 wuclient.doc
+tasksink.txt
+tasksink.doc
+taskvent.txt
+taskvent.doc
+taskwork.txt
+taskwork.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc

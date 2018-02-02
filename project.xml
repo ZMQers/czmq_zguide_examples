@@ -17,6 +17,9 @@
     <main name = "version" />
     <main name = "wuserver" />
     <main name = "wuclient" />
+    <main name = "tasksink" />
+    <main name = "taskvent" />
+    <main name = "taskwork" />
 
     <class name = "common" />
 

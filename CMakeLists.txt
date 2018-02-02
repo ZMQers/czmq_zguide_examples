@@ -446,6 +446,81 @@ install(TARGETS wuclient
     RUNTIME DESTINATION bin
 )
 add_executable(
+    tasksink
+    "${SOURCE_DIR}/src/tasksink.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    tasksink
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    tasksink
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS tasksink
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    taskvent
+    "${SOURCE_DIR}/src/taskvent.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    taskvent
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    taskvent
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS taskvent
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    taskwork
+    "${SOURCE_DIR}/src/taskwork.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    taskwork
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    taskwork
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS taskwork
+    RUNTIME DESTINATION bin
+)
+add_executable(
     czguide_selftest
     "${SOURCE_DIR}/src/czguide_selftest.c"
 )
@@ -553,6 +628,9 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/version
                     ${CMAKE_BINARY_DIR}/src/wuserver
                     ${CMAKE_BINARY_DIR}/src/wuclient
+                    ${CMAKE_BINARY_DIR}/src/tasksink
+                    ${CMAKE_BINARY_DIR}/src/taskvent
+                    ${CMAKE_BINARY_DIR}/src/taskwork
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
 )
 
