@@ -6,7 +6,7 @@
 all-local: doc
 
 # Public programs ("main" tags in project.xml), auto-regenerated:
-MAN1 = lpclient.1 lpserver.1 printerrno.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1 tasksink.1 taskvent.1 taskwork.1 msreader.1 mspoller.1
+MAN1 = lpclient.1 lpserver.1 printerrno.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1 tasksink.1 taskvent.1 taskwork.1 msreader.1 mspoller.1 rrclient.1 rrworker.1 rrbroker.1
 # Public classes ("class" tags in project.xml), auto-regenerated:
 MAN3 = common.3
 # Project overview, written by a human after initial skeleton:
@@ -119,6 +119,18 @@ msreader.txt: $(top_srcdir)/src/msreader.c
 GENERATED_DOCS += mspoller.txt mspoller.doc
 mspoller.txt: $(top_srcdir)/src/mspoller.c
 	"$(srcdir)/mkman" "mspoller" "$(builddir)/mspoller.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += rrclient.txt rrclient.doc
+rrclient.txt: $(top_srcdir)/src/rrclient.c
+	"$(srcdir)/mkman" "rrclient" "$(builddir)/rrclient.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += rrworker.txt rrworker.doc
+rrworker.txt: $(top_srcdir)/src/rrworker.c
+	"$(srcdir)/mkman" "rrworker" "$(builddir)/rrworker.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += rrbroker.txt rrbroker.doc
+rrbroker.txt: $(top_srcdir)/src/rrbroker.c
+	"$(srcdir)/mkman" "rrbroker" "$(builddir)/rrbroker.txt" "$(srcdir)/.."
 
 
 clean-local:

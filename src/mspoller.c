@@ -38,7 +38,6 @@ int main (int argc, char *argv [])
     //  Insert main code here
     if (verbose)
         zsys_info ("mspoller - Reading from multiple sockets");
-    return 0;
 
     //  Connect to task ventilator
     void *context = zmq_ctx_new ();

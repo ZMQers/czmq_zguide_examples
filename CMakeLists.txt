@@ -596,6 +596,81 @@ install(TARGETS mspoller
     RUNTIME DESTINATION bin
 )
 add_executable(
+    rrclient
+    "${SOURCE_DIR}/src/rrclient.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    rrclient
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    rrclient
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS rrclient
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    rrworker
+    "${SOURCE_DIR}/src/rrworker.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    rrworker
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    rrworker
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS rrworker
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    rrbroker
+    "${SOURCE_DIR}/src/rrbroker.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    rrbroker
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    rrbroker
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS rrbroker
+    RUNTIME DESTINATION bin
+)
+add_executable(
     czguide_selftest
     "${SOURCE_DIR}/src/czguide_selftest.c"
 )
@@ -709,6 +784,9 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/taskwork
                     ${CMAKE_BINARY_DIR}/src/msreader
                     ${CMAKE_BINARY_DIR}/src/mspoller
+                    ${CMAKE_BINARY_DIR}/src/rrclient
+                    ${CMAKE_BINARY_DIR}/src/rrworker
+                    ${CMAKE_BINARY_DIR}/src/rrbroker
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
 )
 

@@ -146,6 +146,27 @@ src_mspoller_LDADD = ${program_libs}
 src_mspoller_SOURCES = src/mspoller.c
 endif #ENABLE_MSPOLLER
 
+if ENABLE_RRCLIENT
+bin_PROGRAMS += src/rrclient
+src_rrclient_CPPFLAGS = ${AM_CPPFLAGS}
+src_rrclient_LDADD = ${program_libs}
+src_rrclient_SOURCES = src/rrclient.c
+endif #ENABLE_RRCLIENT
+
+if ENABLE_RRWORKER
+bin_PROGRAMS += src/rrworker
+src_rrworker_CPPFLAGS = ${AM_CPPFLAGS}
+src_rrworker_LDADD = ${program_libs}
+src_rrworker_SOURCES = src/rrworker.c
+endif #ENABLE_RRWORKER
+
+if ENABLE_RRBROKER
+bin_PROGRAMS += src/rrbroker
+src_rrbroker_CPPFLAGS = ${AM_CPPFLAGS}
+src_rrbroker_LDADD = ${program_libs}
+src_rrbroker_SOURCES = src/rrbroker.c
+endif #ENABLE_RRBROKER
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -169,6 +190,9 @@ src: \
 		src/taskwork \
 		src/msreader \
 		src/mspoller \
+		src/rrclient \
+		src/rrworker \
+		src/rrbroker \
 		src/czguide_selftest \
 		src/libczguide.la
 

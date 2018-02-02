@@ -26,7 +26,10 @@
 
     <main name = "msreader" />
     <main name = "mspoller" />
-    
+
+    <main name = "rrclient" />
+    <main name = "rrworker" />
+    <main name = "rrbroker" />
 
     <class name = "common" />
 

@@ -39,6 +39,12 @@ msreader.txt
 msreader.doc
 mspoller.txt
 mspoller.doc
+rrclient.txt
+rrclient.doc
+rrworker.txt
+rrworker.doc
+rrbroker.txt
+rrbroker.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc

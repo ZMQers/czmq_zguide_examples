@@ -624,6 +624,36 @@ AC_ARG_ENABLE([mspoller],
 AM_CONDITIONAL([ENABLE_MSPOLLER], [test x$enable_mspoller != xno])
 AM_COND_IF([ENABLE_MSPOLLER], [AC_MSG_NOTICE([ENABLE_MSPOLLER defined])])
 
+# Check for rrclient intent
+AC_ARG_ENABLE([rrclient],
+    AS_HELP_STRING([--enable-rrclient],
+        [Compile and install 'rrclient' [default=yes]]),
+    [enable_rrclient=$enableval],
+    [enable_rrclient=yes])
+
+AM_CONDITIONAL([ENABLE_RRCLIENT], [test x$enable_rrclient != xno])
+AM_COND_IF([ENABLE_RRCLIENT], [AC_MSG_NOTICE([ENABLE_RRCLIENT defined])])
+
+# Check for rrworker intent
+AC_ARG_ENABLE([rrworker],
+    AS_HELP_STRING([--enable-rrworker],
+        [Compile and install 'rrworker' [default=yes]]),
+    [enable_rrworker=$enableval],
+    [enable_rrworker=yes])
+
+AM_CONDITIONAL([ENABLE_RRWORKER], [test x$enable_rrworker != xno])
+AM_COND_IF([ENABLE_RRWORKER], [AC_MSG_NOTICE([ENABLE_RRWORKER defined])])
+
+# Check for rrbroker intent
+AC_ARG_ENABLE([rrbroker],
+    AS_HELP_STRING([--enable-rrbroker],
+        [Compile and install 'rrbroker' [default=yes]]),
+    [enable_rrbroker=$enableval],
+    [enable_rrbroker=yes])
+
+AM_CONDITIONAL([ENABLE_RRBROKER], [test x$enable_rrbroker != xno])
+AM_COND_IF([ENABLE_RRBROKER], [AC_MSG_NOTICE([ENABLE_RRBROKER defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],
