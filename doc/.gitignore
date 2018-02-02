@@ -59,6 +59,10 @@ mtserver.txt
 mtserver.doc
 mtrelay.txt
 mtrelay.doc
+syncpub.txt
+syncpub.doc
+syncsub.txt
+syncsub.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc

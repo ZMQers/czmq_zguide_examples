@@ -216,6 +216,20 @@ src_mtrelay_LDADD = ${program_libs}
 src_mtrelay_SOURCES = src/mtrelay.c
 endif #ENABLE_MTRELAY
 
+if ENABLE_SYNCPUB
+bin_PROGRAMS += src/syncpub
+src_syncpub_CPPFLAGS = ${AM_CPPFLAGS}
+src_syncpub_LDADD = ${program_libs}
+src_syncpub_SOURCES = src/syncpub.c
+endif #ENABLE_SYNCPUB
+
+if ENABLE_SYNCSUB
+bin_PROGRAMS += src/syncsub
+src_syncsub_CPPFLAGS = ${AM_CPPFLAGS}
+src_syncsub_LDADD = ${program_libs}
+src_syncsub_SOURCES = src/syncsub.c
+endif #ENABLE_SYNCSUB
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -249,6 +263,8 @@ src: \
 		src/interrupt \
 		src/mtserver \
 		src/mtrelay \
+		src/syncpub \
+		src/syncsub \
 		src/czguide_selftest \
 		src/libczguide.la
 

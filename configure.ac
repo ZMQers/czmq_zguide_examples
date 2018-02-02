@@ -724,6 +724,26 @@ AC_ARG_ENABLE([mtrelay],
 AM_CONDITIONAL([ENABLE_MTRELAY], [test x$enable_mtrelay != xno])
 AM_COND_IF([ENABLE_MTRELAY], [AC_MSG_NOTICE([ENABLE_MTRELAY defined])])
 
+# Check for syncpub intent
+AC_ARG_ENABLE([syncpub],
+    AS_HELP_STRING([--enable-syncpub],
+        [Compile and install 'syncpub' [default=yes]]),
+    [enable_syncpub=$enableval],
+    [enable_syncpub=yes])
+
+AM_CONDITIONAL([ENABLE_SYNCPUB], [test x$enable_syncpub != xno])
+AM_COND_IF([ENABLE_SYNCPUB], [AC_MSG_NOTICE([ENABLE_SYNCPUB defined])])
+
+# Check for syncsub intent
+AC_ARG_ENABLE([syncsub],
+    AS_HELP_STRING([--enable-syncsub],
+        [Compile and install 'syncsub' [default=yes]]),
+    [enable_syncsub=$enableval],
+    [enable_syncsub=yes])
+
+AM_CONDITIONAL([ENABLE_SYNCSUB], [test x$enable_syncsub != xno])
+AM_COND_IF([ENABLE_SYNCSUB], [AC_MSG_NOTICE([ENABLE_SYNCSUB defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

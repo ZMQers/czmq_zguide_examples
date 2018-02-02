@@ -846,6 +846,56 @@ install(TARGETS mtrelay
     RUNTIME DESTINATION bin
 )
 add_executable(
+    syncpub
+    "${SOURCE_DIR}/src/syncpub.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    syncpub
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    syncpub
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS syncpub
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    syncsub
+    "${SOURCE_DIR}/src/syncsub.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    syncsub
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    syncsub
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS syncsub
+    RUNTIME DESTINATION bin
+)
+add_executable(
     czguide_selftest
     "${SOURCE_DIR}/src/czguide_selftest.c"
 )
@@ -969,6 +1019,8 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/interrupt
                     ${CMAKE_BINARY_DIR}/src/mtserver
                     ${CMAKE_BINARY_DIR}/src/mtrelay
+                    ${CMAKE_BINARY_DIR}/src/syncpub
+                    ${CMAKE_BINARY_DIR}/src/syncsub
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
 )
 

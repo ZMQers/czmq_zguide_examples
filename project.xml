@@ -43,6 +43,9 @@
     <main name = "mtserver" />
     <main name = "mtrelay" />
 
+    <main name = "syncpub" />
+    <main name = "syncsub" />
+
     <class name = "common" />
 
 </project>
