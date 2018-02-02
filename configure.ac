@@ -604,6 +604,26 @@ AC_ARG_ENABLE([taskwork],
 AM_CONDITIONAL([ENABLE_TASKWORK], [test x$enable_taskwork != xno])
 AM_COND_IF([ENABLE_TASKWORK], [AC_MSG_NOTICE([ENABLE_TASKWORK defined])])
 
+# Check for msreader intent
+AC_ARG_ENABLE([msreader],
+    AS_HELP_STRING([--enable-msreader],
+        [Compile and install 'msreader' [default=yes]]),
+    [enable_msreader=$enableval],
+    [enable_msreader=yes])
+
+AM_CONDITIONAL([ENABLE_MSREADER], [test x$enable_msreader != xno])
+AM_COND_IF([ENABLE_MSREADER], [AC_MSG_NOTICE([ENABLE_MSREADER defined])])
+
+# Check for mspoller intent
+AC_ARG_ENABLE([mspoller],
+    AS_HELP_STRING([--enable-mspoller],
+        [Compile and install 'mspoller' [default=yes]]),
+    [enable_mspoller=$enableval],
+    [enable_mspoller=yes])
+
+AM_CONDITIONAL([ENABLE_MSPOLLER], [test x$enable_mspoller != xno])
+AM_COND_IF([ENABLE_MSPOLLER], [AC_MSG_NOTICE([ENABLE_MSPOLLER defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

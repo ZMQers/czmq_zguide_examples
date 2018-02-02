@@ -546,6 +546,56 @@ install(TARGETS taskwork
     RUNTIME DESTINATION bin
 )
 add_executable(
+    msreader
+    "${SOURCE_DIR}/src/msreader.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    msreader
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    msreader
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS msreader
+    RUNTIME DESTINATION bin
+)
+add_executable(
+    mspoller
+    "${SOURCE_DIR}/src/mspoller.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    mspoller
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    mspoller
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS mspoller
+    RUNTIME DESTINATION bin
+)
+add_executable(
     czguide_selftest
     "${SOURCE_DIR}/src/czguide_selftest.c"
 )
@@ -657,6 +707,8 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/tasksink
                     ${CMAKE_BINARY_DIR}/src/taskvent
                     ${CMAKE_BINARY_DIR}/src/taskwork
+                    ${CMAKE_BINARY_DIR}/src/msreader
+                    ${CMAKE_BINARY_DIR}/src/mspoller
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
 )
 

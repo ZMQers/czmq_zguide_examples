@@ -23,6 +23,9 @@
     <main name = "tasksink" />
     <main name = "taskvent" />
     <main name = "taskwork" />
+
+    <main name = "msreader" />
+    <main name = "mspoller" />
     
 
     <class name = "common" />

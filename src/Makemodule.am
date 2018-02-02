@@ -132,6 +132,20 @@ src_taskwork_LDADD = ${program_libs}
 src_taskwork_SOURCES = src/taskwork.c
 endif #ENABLE_TASKWORK
 
+if ENABLE_MSREADER
+bin_PROGRAMS += src/msreader
+src_msreader_CPPFLAGS = ${AM_CPPFLAGS}
+src_msreader_LDADD = ${program_libs}
+src_msreader_SOURCES = src/msreader.c
+endif #ENABLE_MSREADER
+
+if ENABLE_MSPOLLER
+bin_PROGRAMS += src/mspoller
+src_mspoller_CPPFLAGS = ${AM_CPPFLAGS}
+src_mspoller_LDADD = ${program_libs}
+src_mspoller_SOURCES = src/mspoller.c
+endif #ENABLE_MSPOLLER
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -153,6 +167,8 @@ src: \
 		src/tasksink \
 		src/taskvent \
 		src/taskwork \
+		src/msreader \
+		src/mspoller \
 		src/czguide_selftest \
 		src/libczguide.la
 

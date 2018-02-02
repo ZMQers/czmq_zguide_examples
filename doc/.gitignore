@@ -35,6 +35,10 @@ taskvent.txt
 taskvent.doc
 taskwork.txt
 taskwork.doc
+msreader.txt
+msreader.doc
+mspoller.txt
+mspoller.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc
