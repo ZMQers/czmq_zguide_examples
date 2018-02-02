@@ -654,6 +654,26 @@ AC_ARG_ENABLE([rrbroker],
 AM_CONDITIONAL([ENABLE_RRBROKER], [test x$enable_rrbroker != xno])
 AM_COND_IF([ENABLE_RRBROKER], [AC_MSG_NOTICE([ENABLE_RRBROKER defined])])
 
+# Check for msgqueue intent
+AC_ARG_ENABLE([msgqueue],
+    AS_HELP_STRING([--enable-msgqueue],
+        [Compile and install 'msgqueue' [default=yes]]),
+    [enable_msgqueue=$enableval],
+    [enable_msgqueue=yes])
+
+AM_CONDITIONAL([ENABLE_MSGQUEUE], [test x$enable_msgqueue != xno])
+AM_COND_IF([ENABLE_MSGQUEUE], [AC_MSG_NOTICE([ENABLE_MSGQUEUE defined])])
+
+# Check for wuproxy intent
+AC_ARG_ENABLE([wuproxy],
+    AS_HELP_STRING([--enable-wuproxy],
+        [Compile and install 'wuproxy' [default=yes]]),
+    [enable_wuproxy=$enableval],
+    [enable_wuproxy=yes])
+
+AM_CONDITIONAL([ENABLE_WUPROXY], [test x$enable_wuproxy != xno])
+AM_COND_IF([ENABLE_WUPROXY], [AC_MSG_NOTICE([ENABLE_WUPROXY defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

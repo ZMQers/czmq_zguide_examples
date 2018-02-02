@@ -167,6 +167,20 @@ src_rrbroker_LDADD = ${program_libs}
 src_rrbroker_SOURCES = src/rrbroker.c
 endif #ENABLE_RRBROKER
 
+if ENABLE_MSGQUEUE
+bin_PROGRAMS += src/msgqueue
+src_msgqueue_CPPFLAGS = ${AM_CPPFLAGS}
+src_msgqueue_LDADD = ${program_libs}
+src_msgqueue_SOURCES = src/msgqueue.c
+endif #ENABLE_MSGQUEUE
+
+if ENABLE_WUPROXY
+bin_PROGRAMS += src/wuproxy
+src_wuproxy_CPPFLAGS = ${AM_CPPFLAGS}
+src_wuproxy_LDADD = ${program_libs}
+src_wuproxy_SOURCES = src/wuproxy.c
+endif #ENABLE_WUPROXY
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -193,6 +207,8 @@ src: \
 		src/rrclient \
 		src/rrworker \
 		src/rrbroker \
+		src/msgqueue \
+		src/wuproxy \
 		src/czguide_selftest \
 		src/libczguide.la
 

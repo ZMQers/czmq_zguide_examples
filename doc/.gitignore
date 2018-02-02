@@ -45,6 +45,10 @@ rrworker.txt
 rrworker.doc
 rrbroker.txt
 rrbroker.doc
+msgqueue.txt
+msgqueue.doc
+wuproxy.txt
+wuproxy.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc

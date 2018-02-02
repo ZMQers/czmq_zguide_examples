@@ -31,6 +31,10 @@
     <main name = "rrworker" />
     <main name = "rrbroker" />
 
+    <main name = "msgqueue" />
+
+    <main name = "wuproxy" />
+
     <class name = "common" />
 
 </project>
