@@ -6,7 +6,7 @@
 all-local: doc
 
 # Public programs ("main" tags in project.xml), auto-regenerated:
-MAN1 = lpclient.1 lpserver.1 printerrno.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1 tasksink.1 taskvent.1 taskwork.1 msreader.1 mspoller.1 rrclient.1 rrworker.1 rrbroker.1 msgqueue.1 wuproxy.1 tasksink2.1 taskwork2.1
+MAN1 = lpclient.1 lpserver.1 printerrno.1 hwserver.1 hwclient.1 version.1 wuserver.1 wuclient.1 tasksink.1 taskvent.1 taskwork.1 msreader.1 mspoller.1 rrclient.1 rrworker.1 rrbroker.1 msgqueue.1 wuproxy.1 tasksink2.1 taskwork2.1 interrupt.1
 # Public classes ("class" tags in project.xml), auto-regenerated:
 MAN3 = common.3
 # Project overview, written by a human after initial skeleton:
@@ -147,6 +147,10 @@ tasksink2.txt: $(top_srcdir)/src/tasksink2.c
 GENERATED_DOCS += taskwork2.txt taskwork2.doc
 taskwork2.txt: $(top_srcdir)/src/taskwork2.c
 	"$(srcdir)/mkman" "taskwork2" "$(builddir)/taskwork2.txt" "$(srcdir)/.."
+
+GENERATED_DOCS += interrupt.txt interrupt.doc
+interrupt.txt: $(top_srcdir)/src/interrupt.c
+	"$(srcdir)/mkman" "interrupt" "$(builddir)/interrupt.txt" "$(srcdir)/.."
 
 
 clean-local:

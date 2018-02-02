@@ -53,6 +53,8 @@ tasksink2.txt
 tasksink2.doc
 taskwork2.txt
 taskwork2.doc
+interrupt.txt
+interrupt.doc
 
 # Make sure to track the manually maintained project description
 !*.adoc

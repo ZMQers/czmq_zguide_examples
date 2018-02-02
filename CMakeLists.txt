@@ -771,6 +771,31 @@ install(TARGETS taskwork2
     RUNTIME DESTINATION bin
 )
 add_executable(
+    interrupt
+    "${SOURCE_DIR}/src/interrupt.c"
+)
+if (TARGET czguide)
+target_link_libraries(
+    interrupt
+    czguide
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+if (NOT TARGET czguide AND TARGET czguide-static)
+target_link_libraries(
+    interrupt
+    czguide-static
+    ${LIBZMQ_LIBRARIES}
+    ${CZMQ_LIBRARIES}
+    ${OPTIONAL_LIBRARIES}
+)
+endif()
+install(TARGETS interrupt
+    RUNTIME DESTINATION bin
+)
+add_executable(
     czguide_selftest
     "${SOURCE_DIR}/src/czguide_selftest.c"
 )
@@ -891,6 +916,7 @@ set(cmake_generated ${CMAKE_BINARY_DIR}/CMakeCache.txt
                     ${CMAKE_BINARY_DIR}/src/wuproxy
                     ${CMAKE_BINARY_DIR}/src/tasksink2
                     ${CMAKE_BINARY_DIR}/src/taskwork2
+                    ${CMAKE_BINARY_DIR}/src/interrupt
                     ${CMAKE_BINARY_DIR}/src/czguide_selftest
 )
 

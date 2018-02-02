@@ -195,6 +195,13 @@ src_taskwork2_LDADD = ${program_libs}
 src_taskwork2_SOURCES = src/taskwork2.c
 endif #ENABLE_TASKWORK2
 
+if ENABLE_INTERRUPT
+bin_PROGRAMS += src/interrupt
+src_interrupt_CPPFLAGS = ${AM_CPPFLAGS}
+src_interrupt_LDADD = ${program_libs}
+src_interrupt_SOURCES = src/interrupt.c
+endif #ENABLE_INTERRUPT
+
 if ENABLE_CZGUIDE_SELFTEST
 check_PROGRAMS += src/czguide_selftest
 noinst_PROGRAMS += src/czguide_selftest
@@ -225,6 +232,7 @@ src: \
 		src/wuproxy \
 		src/tasksink2 \
 		src/taskwork2 \
+		src/interrupt \
 		src/czguide_selftest \
 		src/libczguide.la
 

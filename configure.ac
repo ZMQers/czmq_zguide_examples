@@ -694,6 +694,16 @@ AC_ARG_ENABLE([taskwork2],
 AM_CONDITIONAL([ENABLE_TASKWORK2], [test x$enable_taskwork2 != xno])
 AM_COND_IF([ENABLE_TASKWORK2], [AC_MSG_NOTICE([ENABLE_TASKWORK2 defined])])
 
+# Check for interrupt intent
+AC_ARG_ENABLE([interrupt],
+    AS_HELP_STRING([--enable-interrupt],
+        [Compile and install 'interrupt' [default=yes]]),
+    [enable_interrupt=$enableval],
+    [enable_interrupt=yes])
+
+AM_CONDITIONAL([ENABLE_INTERRUPT], [test x$enable_interrupt != xno])
+AM_COND_IF([ENABLE_INTERRUPT], [AC_MSG_NOTICE([ENABLE_INTERRUPT defined])])
+
 # Check for czguide_selftest intent
 AC_ARG_ENABLE([czguide_selftest],
     AS_HELP_STRING([--enable-czguide_selftest],

@@ -38,6 +38,8 @@
     <main name = "tasksink2" />
     <main name = "taskwork2" />
 
+    <main name = "interrupt" />
+
     <class name = "common" />
 
 </project>
